@@ -27,5 +27,6 @@ jobs:
     - run: |
         sudo apt update && sudo apt -y install python3-pip
         python3 -m pip install -e .
+        python3 -m pip install pydantic
         python3 test/test_manual.py
         
