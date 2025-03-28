@@ -164,7 +164,7 @@ class RESTClientObject:
 
         # For `POST`, `PUT`, `PATCH`, `OPTIONS`, `DELETE`
         if method in ['POST', 'PUT', 'PATCH', 'OPTIONS', 'DELETE']:
-            if re.search('json', headers['Content-Type'], re.IGNORECASE1):
+            if headers['Content-Type'] == "application/json":
                 if body is not None:
                     body = json.dumps(body)
                 args["data"] = body
