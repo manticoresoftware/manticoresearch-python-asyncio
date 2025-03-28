@@ -7,6 +7,7 @@
 
 from __future__ import absolute_import
 from pprint import pprint
+import pydantic
 import unittest
 import json
 import manticoresearch
