@@ -26,7 +26,6 @@ class TestManualApi(IsolatedAsyncioTestCase):
         pass
         
     async def test_manual(self):
-		/*
         client = self.client
         indexApi = manticoresearch.IndexApi(client)
         utilsApi = manticoresearch.UtilsApi(client)
@@ -66,7 +65,6 @@ class TestManualApi(IsolatedAsyncioTestCase):
 
         res = searchApi.autocomplete(autocomplete_request)
         pprint(res)
-		*/
         pprint("Tests finished")
         
 if __name__ == '__main__':
