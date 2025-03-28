@@ -20,16 +20,16 @@ import sys
 class TestManualApi(IsolatedAsyncioTestCase):
 
     def setUp(self):
-        configuration = manticoresearch.Configuration(
+        self.configuration = manticoresearch.Configuration(
             host = "http://localhost:9408"
         )
-        self.client = manticoresearch.ApiClient(configuration)
         
     def tearDown(self):
         pass
         
     async def test_manual(self):
-        pprint("Tests finished")
+		async with manticoresearch.ApiClient(self.configuration) as client:
+			pprint("Tests finished")
         
 if __name__ == '__main__':
     unittest.main()
