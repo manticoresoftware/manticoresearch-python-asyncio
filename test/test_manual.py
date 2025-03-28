@@ -20,7 +20,10 @@ import sys
 class TestManualApi(IsolatedAsyncioTestCase):
 
     def setUp(self):
-        self.client = manticoresearch.ApiClient(self.settings['configuration'])
+		configuration = manticoresearch.Configuration(
+    		host = "http://localhost:9408"
+		)
+        self.client = manticoresearch.ApiClient(configuration)
         
     def tearDown(self):
         pass
