@@ -28,8 +28,8 @@ class TestManualApi(IsolatedAsyncioTestCase):
         pass
         
     async def test_manual(self):
-		async with manticoresearch.ApiClient(self.configuration) as client:
-			pprint("Tests finished")
+        async with manticoresearch.ApiClient(self.configuration) as client:
+            pprint("Tests finished")
         
 if __name__ == '__main__':
     unittest.main()
