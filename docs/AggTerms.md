@@ -14,17 +14,15 @@ Name | Type | Description | Notes
 ```python
 from manticoresearch.models.agg_terms import AggTerms
 
-# TODO update the JSON string below
-json = "{}"
 # create an instance of AggTerms from a JSON string
 agg_terms_instance = AggTerms.from_json(json)
 # print the JSON string representation of the object
-print AggTerms.to_json()
+print(AggTerms.to_json())
 
 # convert the object into a dict
 agg_terms_dict = agg_terms_instance.to_dict()
 # create an instance of AggTerms from a dict
-agg_terms_form_dict = agg_terms.from_dict(agg_terms_dict)
+agg_terms_from_dict = AggTerms.from_dict(agg_terms_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
