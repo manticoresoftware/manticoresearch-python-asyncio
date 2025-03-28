@@ -44,7 +44,7 @@ class UtilsApi:
     async def sql(
         self,
         body: Annotated[StrictStr, Field(description="A query parameter string. ")],
-        raw_response: Annotated[Optional[StrictBool], Field(description="Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` for any type of queries. Default value is 'True'. ")] = None,
+        raw_response: Annotated[Optional[StrictBool], Field(description="Optional parameter, defines a format of response. Can be set to `False` for Select only queries and set to `True` for any type of queries. Default value is 'True'. ")] = True,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],

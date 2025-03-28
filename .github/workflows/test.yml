@@ -1,0 +1,31 @@
+name: Testing
+
+on: [workflow_call]
+
+jobs:
+  test:
+    name: Running basic tests
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
+
+    services:
+      manticoresearch-manticore:
+        image: manticoresearch/manticore:dev
+        env:
+          EXTRA: 1
+        ports:
+          - 9408:9308
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - run: |
+        sudo apt update && sudo apt -y install python3-pip
+        python3 -m pip install -e .
+        python3 test/test_manual.py
+        

@@ -64,7 +64,7 @@ configuration = manticoresearch.Configuration(
 
 
 # Enter a context with an instance of the API client
-with manticoresearch.ApiClient(configuration) as api_client:
+async with manticoresearch.ApiClient(configuration) as api_client:
     # Create instances of API classes
     indexApi = manticoresearch.IndexApi(api_client)
     searchApi = manticoresearch.SearchApi(api_client)
