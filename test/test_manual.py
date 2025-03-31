@@ -22,7 +22,8 @@ class TestManualApi(IsolatedAsyncioTestCase):
 
     def setUp(self):
         self.configuration = manticoresearch.Configuration(
-            host = "http://localhost:9408"
+            host = "http://localhost:9408",
+            retries = 10
         )
         
     def tearDown(self):
@@ -34,9 +35,6 @@ class TestManualApi(IsolatedAsyncioTestCase):
             utilsApi = manticoresearch.UtilsApi(client)
             res = await utilsApi.sql('query=DROP TABLE IF EXISTS movies')
             pprint(res)
-
-        async with manticoresearch.ApiClient(self.configuration) as client:
-            utilsApi = manticoresearch.UtilsApi(client)
             res = await utilsApi.sql("CREATE TABLE IF NOT EXISTS movies (title text, plot text, _year integer, rating float, code multi) min_infix_len='2'")
             pprint(res)
 
