@@ -27,7 +27,7 @@ from manticoresearch.exceptions import ApiException, ApiValueError
 
 RESTResponseType = aiohttp.ClientResponse
 
-ALLOW_RETRY_METHODS = frozenset({'DELETE', 'GET', 'HEAD', 'OPTIONS', 'PUT', 'TRACE'})
+ALLOW_RETRY_METHODS = frozenset({'DELETE', 'GET', 'HEAD', 'OPTIONS', 'PUT', 'TRACE', 'POST'})
 
 class RESTResponse(io.IOBase):
 
