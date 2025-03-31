@@ -26,19 +26,20 @@ class TestManualApi(IsolatedAsyncioTestCase):
         )
         
     def tearDown(self):
+
         pass
         
     async def test_manual(self):
         async with manticoresearch.ApiClient(self.configuration) as client:
-            indexApi = manticoresearch.IndexApi(client)
             utilsApi = manticoresearch.UtilsApi(client)
-            searchApi = manticoresearch.SearchApi(client)
-        
             res = await utilsApi.sql('query=DROP TABLE IF EXISTS movies')
             pprint(res)
-            sleep(10)
+
+        async with manticoresearch.ApiClient(self.configuration) as client:
+            utilsApi = manticoresearch.UtilsApi(client)
             res = await utilsApi.sql("CREATE TABLE IF NOT EXISTS movies (title text, plot text, _year integer, rating float, code multi) min_infix_len='2'")
+            pprint(res)
+
             pprint("Tests finished")
-        
 if __name__ == '__main__':
     unittest.main()
