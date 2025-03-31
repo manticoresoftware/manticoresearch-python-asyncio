@@ -204,6 +204,7 @@ class RESTClientObject:
 
         pool_manager: Union[aiohttp.ClientSession, aiohttp_retry.RetryClient]
         if self.retry_client is not None and method in ALLOW_RETRY_METHODS:
+            pprint("with retries")
             pool_manager = self.retry_client
         else:
             pool_manager = self.pool_manager
