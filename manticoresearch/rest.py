@@ -18,6 +18,7 @@ import json
 import re
 import ssl
 from typing import Optional, Union
+from pprint import pprint
 
 import aiohttp
 import aiohttp_retry
@@ -86,6 +87,7 @@ class RESTClientObject:
         retries = configuration.retries
         self.retry_client: Optional[aiohttp_retry.RetryClient]
         if retries is not None:
+            pprint(retries)
             self.retry_client = aiohttp_retry.RetryClient(
                 client_session=self.pool_manager,
                 retry_options=aiohttp_retry.ExponentialRetry(
