@@ -22,8 +22,7 @@ class TestManualApi(IsolatedAsyncioTestCase):
 
     def setUp(self):
         self.configuration = manticoresearch.Configuration(
-            host = "http://localhost:9408",
-            retries = 10
+            host = "http://localhost:9408"
         )
         
     def tearDown(self):
@@ -33,12 +32,40 @@ class TestManualApi(IsolatedAsyncioTestCase):
     async def test_manual(self):
         async with manticoresearch.ApiClient(self.configuration) as client:
             utilsApi = manticoresearch.UtilsApi(client)
-            res = await utilsApi.sql('query=DROP TABLE IF EXISTS movies')
-            pprint(res)
-            sleep(10)		
-            res = await utilsApi.sql("CREATE TABLE IF NOT EXISTS movies (title text, plot text, _year integer, rating float, code multi) min_infix_len='2'")
+            await utilsApi.sql('query=DROP TABLE IF EXISTS movies')
+            
+        async with manticoresearch.ApiClient(self.configuration) as client:
+            utilsApi = manticoresearch.UtilsApi(client)
+            await utilsApi.sql("CREATE TABLE IF NOT EXISTS movies (title text, plot text, _year integer, rating float, code multi) min_infix_len='2'")
+            
+
+        searchApi = manticoresearch.SearchApi(client)
+        
+        docs = [ \
+            {"insert": {"table" : "movies", "id" : 1, "doc" : {"title" : "Star Trek 2: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "_year": 2002, "rating": 6.4, "code": [1,2,3]}}}, \
+            {"insert": {"table" : "movies", "id" : 2, "doc" : {"title" : "Star Trek 1: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "_year": 2001, "rating": 6.5, "code": [1,12,3]}}},
+            {"insert": {"table" : "movies", "id" : 3, "doc" : {"title" : "Star Trek 3: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "_year": 2003, "rating": 6.6, "code": [11,2,3]}}}, \
+            {"insert": {"table" : "movies", "id" : 4, "doc" : {"title" : "Star Trek 4: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "_year": 2003, "rating": 6.5, "code": [1,2,4]}}},
+        ]
+        async with manticoresearch.ApiClient(self.configuration) as client:
+            indexApi = manticoresearch.IndexApi(client)
+            indexApi.bulk('\n'.join(map(json.dumps,docs)))
+        
+        search_request = SearchRequest(
+            table="movies",
+        )
+        matchFilter = QueryFilter() 
+        matchFilter.match = {"title":"4"}
+        mustCond = [ matchFilter ]
+        boolFilter = BoolFilter(must=mustCond)
+        searchQuery = SearchQuery(bool={"must": [ {"match": {"title":"4"}}] })
+        search_request.query = searchQuery
+
+        async with manticoresearch.ApiClient(self.configuration) as client:
+            searchApi = manticoresearch.SearchApi(client)
+            res = searchApi.search(search_request)
             pprint(res)
 
-            pprint("Tests finished")
+        pprint("Tests finished")
 if __name__ == '__main__':
     unittest.main()

@@ -18,7 +18,6 @@ import json
 import re
 import ssl
 from typing import Optional, Union
-from pprint import pprint
 
 import aiohttp
 import aiohttp_retry
@@ -27,7 +26,7 @@ from manticoresearch.exceptions import ApiException, ApiValueError
 
 RESTResponseType = aiohttp.ClientResponse
 
-ALLOW_RETRY_METHODS = frozenset({'DELETE', 'GET', 'HEAD', 'OPTIONS', 'PUT', 'TRACE', 'POST'})
+ALLOW_RETRY_METHODS = frozenset({'DELETE', 'GET', 'HEAD', 'OPTIONS', 'PUT', 'TRACE'})
 
 class RESTResponse(io.IOBase):
 
@@ -87,7 +86,6 @@ class RESTClientObject:
         retries = configuration.retries
         self.retry_client: Optional[aiohttp_retry.RetryClient]
         if retries is not None:
-            pprint(retries)
             self.retry_client = aiohttp_retry.RetryClient(
                 client_session=self.pool_manager,
                 retry_options=aiohttp_retry.ExponentialRetry(
@@ -204,7 +202,6 @@ class RESTClientObject:
 
         pool_manager: Union[aiohttp.ClientSession, aiohttp_retry.RetryClient]
         if self.retry_client is not None and method in ALLOW_RETRY_METHODS:
-            pprint("with retries")
             pool_manager = self.retry_client
         else:
             pool_manager = self.pool_manager
