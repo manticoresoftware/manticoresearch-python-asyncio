@@ -1,16 +1,7 @@
-# OpenAPI generated server
+# Manticore Python client
 
- WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python-asyncio/tree/1.0.0
+Сlient for Manticore Search.
 
-## Requirements.
-
-Minimum Manticore Search version is >= 6.2.0 with HTTP protocol enabled.
-
-| **manticoresearch-python-asyncio*  | **Manticore Search**                | **Python**     | **Compatibility**       |
-| -----------------------------------| ----------------------------------- | -------------- | ------------------------|
-| `manticoresearch-devel`            | `dev` (latest development version)  | 3.4 or newer   | ✅ Fully Compatible     |
-| 1.0.0 or newer                     | 9.2.14 or newer                     | 3.4 or newer   | ✅ Fully Compatible     |
-| 1.0.0 or newer                     | 6.2.0 to 9.2.14                     | 3.4 or newer   | ⚠️ Partially Compatible |
 
 ## Usage
 To run the server, please execute the following from the root directory:
