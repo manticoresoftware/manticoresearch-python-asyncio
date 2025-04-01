@@ -34,7 +34,7 @@ class TestManualApi(IsolatedAsyncioTestCase):
             utilsApi = manticoresearch.UtilsApi(client)
             await utilsApi.sql('query=DROP TABLE IF EXISTS movies')
             
-        
+        async with manticoresearch.ApiClient(self.configuration) as client:
             utilsApi = manticoresearch.UtilsApi(client)
             await utilsApi.sql("CREATE TABLE IF NOT EXISTS movies (title text, plot text, _year integer, rating float, code multi) min_infix_len='2'")
             
