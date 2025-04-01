@@ -66,6 +66,16 @@ class TestManualApi(IsolatedAsyncioTestCase):
             res = searchApi.search(search_request)
             pprint(res)
 
+            search_request = {"table":"movies","query":{"bool": {"must": [ {"match": {"title":"4"}}] }}}
+
+            res = searchApi.search(search_request)
+            pprint(res)
+
+            autocomplete_request = {"table":"movies","query": "Romul","options": {"fuzziness": 0, "layouts": "us,uk"} }
+
+            res = searchApi.autocomplete(autocomplete_request)
+            pprint(res)
+
         pprint("Tests finished")
 if __name__ == '__main__':
     unittest.main()
