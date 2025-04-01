@@ -11,6 +11,7 @@ Minimum Manticore Search version is >= 6.2.0 with HTTP protocol enabled.
 | `manticoresearch-devel`            | `dev` (latest development version)  | 3.4 or newer   | ✅ Fully Compatible     |
 | 1.0.0 or newer                     | 9.2.14 or newer                     | 3.4 or newer   | ✅ Fully Compatible     |
 | 1.0.0 or newer                     | 6.2.0 to 9.2.14                     | 3.4 or newer   | ⚠️ Partially Compatible |
+| 1.0.0 or newer                     | 2.5.1 to 6.2.0                      | 3.4 or newer   | ❗ Incompatible         |
 
 ## Usage
 To run the server, please execute the following from the root directory:
