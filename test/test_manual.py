@@ -34,13 +34,11 @@ class TestManualApi(IsolatedAsyncioTestCase):
             utilsApi = manticoresearch.UtilsApi(client)
             await utilsApi.sql('query=DROP TABLE IF EXISTS movies')
             
-        async with manticoresearch.ApiClient(self.configuration) as client:
+        
             utilsApi = manticoresearch.UtilsApi(client)
             await utilsApi.sql("CREATE TABLE IF NOT EXISTS movies (title text, plot text, _year integer, rating float, code multi) min_infix_len='2'")
             
 
-        searchApi = manticoresearch.SearchApi(client)
-        
         docs = [ \
             {"insert": {"table" : "movies", "id" : 1, "doc" : {"title" : "Star Trek 2: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "_year": 2002, "rating": 6.4, "code": [1,2,3]}}}, \
             {"insert": {"table" : "movies", "id" : 2, "doc" : {"title" : "Star Trek 1: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "_year": 2001, "rating": 6.5, "code": [1,12,3]}}},
