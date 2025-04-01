@@ -1,4 +1,4 @@
-# OpenAPI generated server
+# Manticore Python client
 
  WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python-asyncio/tree/1.0.0
 
