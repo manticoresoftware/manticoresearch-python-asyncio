@@ -51,17 +51,17 @@ class TestManualApi(IsolatedAsyncioTestCase):
             indexApi = manticoresearch.IndexApi(client)
             indexApi.bulk('\n'.join(map(json.dumps,docs)))
         
-        search_request = SearchRequest(
-            table="movies",
-        )
-        matchFilter = QueryFilter() 
-        matchFilter.match = {"title":"4"}
-        mustCond = [ matchFilter ]
-        boolFilter = BoolFilter(must=mustCond)
-        searchQuery = SearchQuery(bool={"must": [ {"match": {"title":"4"}}] })
-        search_request.query = searchQuery
+            search_request = SearchRequest(
+                table="movies",
+            )
+            matchFilter = QueryFilter() 
+            matchFilter.match = {"title":"4"}
+            mustCond = [ matchFilter ]
+            boolFilter = BoolFilter(must=mustCond)
+            searchQuery = SearchQuery(bool={"must": [ {"match": {"title":"4"}}] })
+            search_request.query = searchQuery
 
-        async with manticoresearch.ApiClient(self.configuration) as client:
+        
             searchApi = manticoresearch.SearchApi(client)
             res = searchApi.search(search_request)
             pprint(res)
