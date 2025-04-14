@@ -21,7 +21,7 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "manticoresearch-devel"
+NAME = "manticoresearch-asyncio-devel"
 VERSION = "8.0.0-dev"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
