@@ -12,7 +12,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from setuptools import setup, find_packages  # noqa: H301
 
 # To install the library, run the following
@@ -22,10 +21,10 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "manticoresearch-asyncio-devel"
-VERSION = "8.0.0-dev"
+VERSION = "2.0.0"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
-    "urllib3 >= 1.25.3, < 2.1.0",
+    "urllib3 >= 1.25.3, < 3",
     "python-dateutil",
     "aiohttp >= 3.0.0",
     "aiohttp-retry >= 2.8.3",

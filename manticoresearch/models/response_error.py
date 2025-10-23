@@ -16,7 +16,7 @@
 from __future__ import annotations
 import json
 import pprint
-from pydantic import BaseModel, Field, StrictStr, ValidationError, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
 from manticoresearch.models.response_error_details import ResponseErrorDetails
 from pydantic import StrictStr, Field
@@ -36,10 +36,10 @@ class ResponseError(BaseModel):
     actual_instance: Optional[Union[ResponseErrorDetails, str]] = None
     one_of_schemas: Set[str] = { "ResponseErrorDetails", "str" }
 
-    #model_config = ConfigDict(
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def __init__(self, *args, **kwargs) -> None:
@@ -50,7 +50,7 @@ class ResponseError(BaseModel):
                 raise ValueError("If a position argument is used, keyword arguments cannot be used.")
             super().__init__(actual_instance=args[0])
         else:
-            super().__init__(actual_instance=kwargs)
+            super().__init__(**kwargs)
 
     @field_validator('actual_instance')
     def actual_instance_must_validate_oneof(cls, v):

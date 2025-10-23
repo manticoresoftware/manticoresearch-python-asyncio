@@ -13,11 +13,12 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 # import models into model package
 from manticoresearch.models.agg_composite import AggComposite
 from manticoresearch.models.agg_composite_source import AggCompositeSource
 from manticoresearch.models.agg_composite_term import AggCompositeTerm
+from manticoresearch.models.agg_date_histogram import AggDateHistogram
+from manticoresearch.models.agg_histogram import AggHistogram
 from manticoresearch.models.agg_terms import AggTerms
 from manticoresearch.models.aggregation import Aggregation
 from manticoresearch.models.autocomplete_request import AutocompleteRequest
@@ -31,11 +32,13 @@ from manticoresearch.models.geo_distance import GeoDistance
 from manticoresearch.models.geo_distance_location_anchor import GeoDistanceLocationAnchor
 from manticoresearch.models.highlight import Highlight
 from manticoresearch.models.highlight_field_option import HighlightFieldOption
+from manticoresearch.models.highlight_fields import HighlightFields
 from manticoresearch.models.hits_hits import HitsHits
 from manticoresearch.models.insert_document_request import InsertDocumentRequest
 from manticoresearch.models.join import Join
 from manticoresearch.models.join_cond import JoinCond
 from manticoresearch.models.join_on import JoinOn
+from manticoresearch.models.knn import Knn
 from manticoresearch.models.knn_query import KnnQuery
 from manticoresearch.models.match import Match
 from manticoresearch.models.match_all import MatchAll
@@ -56,3 +59,4 @@ from manticoresearch.models.sql_response import SqlResponse
 from manticoresearch.models.success_response import SuccessResponse
 from manticoresearch.models.update_document_request import UpdateDocumentRequest
 from manticoresearch.models.update_response import UpdateResponse
+

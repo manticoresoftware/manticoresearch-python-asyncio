@@ -18,8 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,13 +28,15 @@ class SqlObjResponse(BaseModel):
     SqlObjResponse
     """ # noqa: E501
     hits: Dict[str, Any]
-    __properties: ClassVar[List[str]] = ["hits"]
+    took: Optional[Union[StrictFloat, StrictInt]] = None
+    timed_out: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["hits", "took", "timed_out"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:
@@ -81,7 +83,9 @@ class SqlObjResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "hits": obj.get("hits")
+            "hits": obj.get("hits"),
+            "took": obj.get("took"),
+            "timed_out": obj.get("timed_out")
         })
         return _obj
 

@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,15 +27,15 @@ class AggTerms(BaseModel):
     """
     Object containing term fields to aggregate on
     """ # noqa: E501
-    field: StrictStr = Field(description="Name of attribute to aggregate by")
+    var_field: StrictStr = Field(description="Name of attribute to aggregate by", alias="field")
     size: Optional[StrictInt] = Field(default=None, description="Maximum number of buckets in the result")
     __properties: ClassVar[List[str]] = ["field", "size"]
 
-    #model_config = ConfigDict(
-    #    populate_by_name=True,
-    #    validate_assignment=True,
-    #    protected_namespaces=(),
-    #)
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
 
 
     def to_str(self) -> str:

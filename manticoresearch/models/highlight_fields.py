@@ -16,24 +16,24 @@
 from __future__ import annotations
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr, ValidationError, field_validator
-from typing import Any, List, Optional, Union
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
+from typing import Any, Dict, List, Optional
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-KNNQUERY_ONE_OF_SCHEMAS = ["List[float]", "str"]
+HIGHLIGHTFIELDS_ONE_OF_SCHEMAS = ["List[str]", "object"]
 
-class KnnQuery(BaseModel):
+class HighlightFields(BaseModel):
     """
-    KnnQuery
+    List of fields available for highlighting
     """
-    # data type: str
-    oneof_schema_1_validator: Optional[StrictStr] = None
-    # data type: List[float]
-    oneof_schema_2_validator: Optional[List[Union[StrictFloat, StrictInt]]] = None
-    actual_instance: Optional[Union[List[float], str]] = None
-    one_of_schemas: Set[str] = { "List[float]", "str" }
+    # data type: List[str]
+    oneof_schema_1_validator: Optional[List[StrictStr]] = None
+    # data type: object
+    oneof_schema_2_validator: Optional[Dict[str, Any]] = None
+    actual_instance: Optional[Union[List[str], object]] = None
+    one_of_schemas: Set[str] = { "List[str]", "object" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -53,16 +53,16 @@ class KnnQuery(BaseModel):
 
     @field_validator('actual_instance')
     def actual_instance_must_validate_oneof(cls, v):
-        instance = KnnQuery.model_construct()
+        instance = HighlightFields.model_construct()
         error_messages = []
         match = 0
-        # validate data type: str
+        # validate data type: List[str]
         try:
             instance.oneof_schema_1_validator = v
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # validate data type: List[float]
+        # validate data type: object
         try:
             instance.oneof_schema_2_validator = v
             match += 1
@@ -70,10 +70,10 @@ class KnnQuery(BaseModel):
             error_messages.append(str(e))
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in KnnQuery with oneOf schemas: List[float], str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in HighlightFields with oneOf schemas: List[str], object. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in KnnQuery with oneOf schemas: List[float], str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in HighlightFields with oneOf schemas: List[str], object. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -88,7 +88,7 @@ class KnnQuery(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into str
+        # deserialize data into List[str]
         try:
             # validation
             instance.oneof_schema_1_validator = json.loads(json_str)
@@ -97,7 +97,7 @@ class KnnQuery(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into List[float]
+        # deserialize data into object
         try:
             # validation
             instance.oneof_schema_2_validator = json.loads(json_str)
@@ -109,10 +109,10 @@ class KnnQuery(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into KnnQuery with oneOf schemas: List[float], str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into HighlightFields with oneOf schemas: List[str], object. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into KnnQuery with oneOf schemas: List[float], str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into HighlightFields with oneOf schemas: List[str], object. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -126,7 +126,7 @@ class KnnQuery(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], List[float], str]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], List[str], object]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
