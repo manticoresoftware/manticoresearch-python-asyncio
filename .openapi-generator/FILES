@@ -24,6 +24,8 @@ docs/Highlight.md
 docs/HighlightFieldOption.md
 docs/HighlightFields.md
 docs/HitsHits.md
+docs/HitsHitsId.md
+docs/HitsHitsScore.md
 docs/IndexApi.md
 docs/InsertDocumentRequest.md
 docs/Join.md
@@ -83,6 +85,8 @@ manticoresearch/models/highlight.py
 manticoresearch/models/highlight_field_option.py
 manticoresearch/models/highlight_fields.py
 manticoresearch/models/hits_hits.py
+manticoresearch/models/hits_hits_id.py
+manticoresearch/models/hits_hits_score.py
 manticoresearch/models/insert_document_request.py
 manticoresearch/models/join.py
 manticoresearch/models/join_cond.py
@@ -136,6 +140,8 @@ test/test_highlight.py
 test/test_highlight_field_option.py
 test/test_highlight_fields.py
 test/test_hits_hits.py
+test/test_hits_hits_id.py
+test/test_hits_hits_score.py
 test/test_index_api.py
 test/test_insert_document_request.py
 test/test_join.py
