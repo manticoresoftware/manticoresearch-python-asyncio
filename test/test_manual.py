@@ -31,8 +31,8 @@ class TestManualApi(IsolatedAsyncioTestCase):
 
     async def utils_api_test(self, client=None):
         utilsApi = manticoresearch.UtilsApi(client)
-        utilsApi.sql('query=DROP TABLE IF EXISTS movies')
-        res = utilsApi.sql("CREATE TABLE IF NOT EXISTS movies (title text, plot text, _year integer, rating float, code multi) min_infix_len='2'")
+        await utilsApi.sql('query=DROP TABLE IF EXISTS movies')
+        res = await utilsApi.sql("CREATE TABLE IF NOT EXISTS movies (title text, plot text, _year integer, rating float, code multi) min_infix_len='2'")
         self.assertEqual(res.to_dict(), [{'total': 0, 'error': '', 'warning': ''}])
         print("Utils API tests successful")
 
@@ -44,7 +44,7 @@ class TestManualApi(IsolatedAsyncioTestCase):
             {"insert": {"table" : "movies", "id" : 3, "doc" : {"title" : "Star Trek 3: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "_year": 2003, "rating": 6.6, "code": [11,2,3]}}}, \
             {"insert": {"table" : "movies", "id" : 4, "doc" : {"title" : "Star Trek 4: Nemesis", "plot": "The Enterprise is diverted to the Romulan homeworld Romulus, supposedly because they want to negotiate a peace treaty. Captain Picard and his crew discover a serious threat to the Federation once Praetor Shinzon plans to attack Earth.", "_year": 2003, "rating": 6.5, "code": [1,2,4]}}},
         ]        
-        res = indexApi.bulk('\n'.join(map(json.dumps,docs)))
+        res = await indexApi.bulk('\n'.join(map(json.dumps,docs)))
         res_json = res.to_dict()
         self.assertEqual(res_json['items'][0]['bulk']['created'], 4)
         print("Index API tests successful")
@@ -62,17 +62,17 @@ class TestManualApi(IsolatedAsyncioTestCase):
         search_request.query = searchQuery
 
         searchApi = manticoresearch.SearchApi(client)
-        res = searchApi.search(search_request)
+        res = await searchApi.search(search_request)
         self.assertEqual(res.hits.hits[0].id, 4)
 
         search_request = {"table":"movies","query":{"bool": {"must": [ {"match": {"title":"4"}}] }}}
 
-        res = searchApi.search(search_request)
+        res = await searchApi.search(search_request)
         self.assertEqual(res.hits.hits[0].id, 4)
 
         autocomplete_request = {"table":"movies","query": "Romul","options": {"fuzziness": 0, "layouts": "us,uk"} }
 
-        res = searchApi.autocomplete(autocomplete_request)
+        res = await searchApi.autocomplete(autocomplete_request)
         self.assertEqual(res[0]['total'], 2)
         self.assertEqual(res[0]['data'][0]['query'], 'romulan')
         self.assertEqual(res[0]['data'][1]['query'], 'romulus')
@@ -80,10 +80,10 @@ class TestManualApi(IsolatedAsyncioTestCase):
         print("Search API tests successful")
 
     async def test_manual(self):
-        client = manticoresearch.ApiClient(self.configuration)
-        await self.utils_api_test(client)
-        await self.index_api_test(client)
-        await self.search_api_test(client)
+        async with manticoresearch.ApiClient(self.configuration) as client:
+            await self.utils_api_test(client)
+            await self.index_api_test(client)
+            await self.search_api_test(client)
             
         print("\nTests finished")
 if __name__ == '__main__':
