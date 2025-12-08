@@ -3,7 +3,7 @@
 Сlient for Manticore Search.
 
 
-❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python-asyncio/tree/1.0.0
+❗ WARNING: this is a development version of the client. The latest release's readme is https://github.com/manticoresoftware/manticoresearch-python-asyncio/tree/2.0.0
 
 ## Requirements.
 
@@ -150,6 +150,8 @@ Class | Method | HTTP request | Description
  - [HighlightFieldOption](docs/HighlightFieldOption.md)
  - [HighlightFields](docs/HighlightFields.md)
  - [HitsHits](docs/HitsHits.md)
+ - [HitsHitsId](docs/HitsHitsId.md)
+ - [HitsHitsScore](docs/HitsHitsScore.md)
  - [InsertDocumentRequest](docs/InsertDocumentRequest.md)
  - [Join](docs/Join.md)
  - [JoinCond](docs/JoinCond.md)

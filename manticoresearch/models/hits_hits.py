@@ -20,6 +20,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from manticoresearch.models.hits_hits_id import HitsHitsId
+from manticoresearch.models.hits_hits_score import HitsHitsScore
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,8 +29,8 @@ class HitsHits(BaseModel):
     """
     Search hit representing a matched document
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The ID of the matched document", alias="_id")
-    score: Optional[StrictInt] = Field(default=None, description="The score of the matched document", alias="_score")
+    id: Optional[HitsHitsId] = Field(default=None, alias="_id")
+    score: Optional[HitsHitsScore] = Field(default=None, alias="_score")
     source: Optional[Dict[str, Any]] = Field(default=None, description="The source data of the matched document", alias="_source")
     knn_dist: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The knn distance of the matched document returned for knn queries", alias="_knn_dist")
     highlight: Optional[Dict[str, Any]] = Field(default=None, description="The highlighting-related data of the matched document")
@@ -76,6 +78,12 @@ class HitsHits(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of id
+        if self.id:
+            _dict['_id'] = self.id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of score
+        if self.score:
+            _dict['_score'] = self.score.to_dict()
         return _dict
 
     @classmethod
@@ -88,8 +96,8 @@ class HitsHits(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "_id": obj.get("_id"),
-            "_score": obj.get("_score"),
+            "_id": HitsHitsId.from_dict(obj["_id"]) if obj.get("_id") is not None else None,
+            "_score": HitsHitsScore.from_dict(obj["_score"]) if obj.get("_score") is not None else None,
             "_source": obj.get("_source"),
             "_knn_dist": obj.get("_knn_dist"),
             "highlight": obj.get("highlight"),

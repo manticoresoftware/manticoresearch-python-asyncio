@@ -6,8 +6,8 @@ Search hit representing a matched document
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | The ID of the matched document | [optional] 
-**score** | **int** | The score of the matched document | [optional] 
+**id** | [**HitsHitsId**](HitsHitsId.md) |  | [optional] 
+**score** | [**HitsHitsScore**](HitsHitsScore.md) |  | [optional] 
 **source** | **object** | The source data of the matched document | [optional] 
 **knn_dist** | **float** | The knn distance of the matched document returned for knn queries | [optional] 
 **highlight** | **object** | The highlighting-related data of the matched document | [optional] 
