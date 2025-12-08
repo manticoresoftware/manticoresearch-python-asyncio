@@ -51,8 +51,6 @@ __all__ = [
     "HighlightFieldOption",
     "HighlightFields",
     "HitsHits",
-    "HitsHitsId",
-    "HitsHitsScore",
     "InsertDocumentRequest",
     "Join",
     "JoinCond",
@@ -117,8 +115,6 @@ from manticoresearch.models.highlight import Highlight as Highlight
 from manticoresearch.models.highlight_field_option import HighlightFieldOption as HighlightFieldOption
 from manticoresearch.models.highlight_fields import HighlightFields as HighlightFields
 from manticoresearch.models.hits_hits import HitsHits as HitsHits
-from manticoresearch.models.hits_hits_id import HitsHitsId as HitsHitsId
-from manticoresearch.models.hits_hits_score import HitsHitsScore as HitsHitsScore
 from manticoresearch.models.insert_document_request import InsertDocumentRequest as InsertDocumentRequest
 from manticoresearch.models.join import Join as Join
 from manticoresearch.models.join_cond import JoinCond as JoinCond
