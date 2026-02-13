@@ -1,4 +1,4 @@
-# Manticore Python client
+# Manticore Asynchronous Python client
 
 Сlient for Manticore Search.
 
@@ -7,22 +7,15 @@
 
 ## Requirements.
 
-Minimum Manticore Search version is >= 2.5.1 with HTTP protocol enabled.
+Minimum Manticore Search version is >= 9.2.14 with HTTP protocol enabled.
 
-| **manticoresearch-python*   | **Manticore Search**                | **Python**     | **Compatibility**       |
-| --------------------------- | ----------------------------------- | -------------- | ------------------------|
-| `manticoresearch-devel`     | `dev` (latest development version)  | 3.4 or newer   | ✅ Fully Compatible     |
-| 8.0.0 or newer              | 9.2.14 or newer                     | 3.4 or newer   | ✅ Fully Compatible     |
-| 6.0.0 to 8.0.0              | 9.2.14 or newer                     | 3.4 or newer   | ⚠️ Partially Compatible |
-| 6.0.0 to 8.0.0              | 7.0.0 to 9.2.14                     | 3.4 or newer   | ✅ Fully Compatible     |
-| 6.0.0 or newer              | 6.2.1 to 7.0.0                      | 3.4 or newer   | ⚠️ Partially Compatible |
-| 3.3.1 to 6.0.0              | 7.0.0 or newer                      | 3.4 or newer   | ⚠️ Partially Compatible |
-| 3.3.1 to 6.0.0              | 6.2.1 to 7.0.0                      | 3.4 or newer   | ✅ Fully Compatible     |
-| 2.0.0 to 3.3.1              | 6.2.0 or newer                      | 3.4 or newer   | ⚠️ Partially Compatible |
-| 2.0.0 to 3.3.1              | 4.2.1 to 6.2.0                      | 3.4 or newer   | ✅ Fully Compatible     |
-| 1.0.6 to 2.0.0              | 4.0.2 to 4.2.1                      | 3.4 or newer   | ✅ Fully Compatible     |
-| 1.0.5 to 1.0.6              | 4.0.2 to 4.2.1                      | 2.7 or newer   | ⚠️ Partially Compatible |
-| 1.0.5 to 1.0.6              | 2.5.1 to 4.0.2                      | 2.7 or newer   | ✅ Fully Compatible     |
+| **manticoresearch-python*       | **Manticore Search**                | **Python**     | **Compatibility**       |
+| ------------------------------- | ----------------------------------- | -------------- | ------------------------|
+| `manticoresearch-asyncio-devel` | `dev` (latest development version)  | 3.4 or newer   | ✅ Fully Compatible     |
+| 2.0.0 or newer                  | 17.5.1 or newer                     | 3.4 or newer   | ✅ Fully Compatible     |
+| 2.0.0 or newer                  | 9.2.14 to 17.5.1                    | 3.4 or newer   | ⚠️ Partially Compatible |
+| 1.0.0 to 2.0.0                  | 17.5.1 or newer                     | 3.4 or newer   | ⚠️ Partially Compatible |
+| 1.0.0 to 2.0.0                  | 9.2.14 to 17.5.1                    | 3.4 or newer   | ✅ Fully Compatible     |
 
 ## Installation & Usage
 ### pip install
@@ -150,8 +143,6 @@ Class | Method | HTTP request | Description
  - [HighlightFieldOption](docs/HighlightFieldOption.md)
  - [HighlightFields](docs/HighlightFields.md)
  - [HitsHits](docs/HitsHits.md)
- - [HitsHitsId](docs/HitsHitsId.md)
- - [HitsHitsScore](docs/HitsHitsScore.md)
  - [InsertDocumentRequest](docs/InsertDocumentRequest.md)
  - [Join](docs/Join.md)
  - [JoinCond](docs/JoinCond.md)

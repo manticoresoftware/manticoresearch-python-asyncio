@@ -34,8 +34,6 @@ from manticoresearch.models.highlight import Highlight
 from manticoresearch.models.highlight_field_option import HighlightFieldOption
 from manticoresearch.models.highlight_fields import HighlightFields
 from manticoresearch.models.hits_hits import HitsHits
-from manticoresearch.models.hits_hits_id import HitsHitsId
-from manticoresearch.models.hits_hits_score import HitsHitsScore
 from manticoresearch.models.insert_document_request import InsertDocumentRequest
 from manticoresearch.models.join import Join
 from manticoresearch.models.join_cond import JoinCond
